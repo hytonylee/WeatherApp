@@ -1,0 +1,26 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "Weekly React Practice with Weather Api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel public/index.html",
+    "build": "parcel build public/index.html --out-dir prod",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "WeatherApi",
+    "Parcel"
+  ],
+  "author": "Tony Lee <hy.tony.lee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router": "^5.0.1"
+  }
+}
