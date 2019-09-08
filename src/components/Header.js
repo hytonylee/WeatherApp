@@ -1,13 +1,13 @@
 import React from 'react';
-import { Jumbotron, Container, Row, Col, InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
+import { Container } from 'reactstrap'
 
-const Header = (props) => {
+const Header = () => {
     return (
         <React.Fragment>
-            <Jumbotron fluid className='header'>
+            <Container className='header'>
                 <h2 className='header-title'>Weekly Project: WeatherApp</h2>
                 <p className='header-desc'>This is project is built with ReactJS, styled by ReactStrap and linked up OpenWeather Api.</p>
-            </Jumbotron>
+            </Container>
         </React.Fragment>
     )
 }

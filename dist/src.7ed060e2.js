@@ -45630,9 +45630,8 @@ var _reactstrap = require("reactstrap");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Header = function Header(props) {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactstrap.Jumbotron, {
-    fluid: true,
+var Header = function Header() {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactstrap.Container, {
     className: "header"
   }, _react.default.createElement("h2", {
     className: "header-title"
