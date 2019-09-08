@@ -45631,13 +45631,13 @@ var _reactstrap = require("reactstrap");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactstrap.Container, {
+  return _react.default.createElement(_reactstrap.Container, {
     className: "header"
   }, _react.default.createElement("h2", {
     className: "header-title"
   }, "Weekly Project: WeatherApp"), _react.default.createElement("p", {
     className: "header-desc"
-  }, "This is project is built with ReactJS, styled by ReactStrap and linked up OpenWeather Api.")));
+  }, "This is project is built with ReactJS, styled by ReactStrap and linked up OpenWeather Api."));
 };
 
 var _default = Header;
