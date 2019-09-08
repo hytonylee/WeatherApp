@@ -6,7 +6,6 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
-                Weekly Project: WeatherApp
             </div>
         )
     }
