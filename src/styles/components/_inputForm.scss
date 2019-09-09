@@ -1,0 +1,24 @@
+.inputContainer {
+    background-color: white;
+    padding: 1% 0 1% 0;
+}
+
+.inputForm {
+    margin: 1%;
+    background-color: white;
+}
+
+.inputLabel {
+    font-size: $font-size-medium;
+    margin-right: $xs-size;
+}
+
+.inputBox {
+    font-size: $font-size-small;
+    padding: $xs-size;
+    margin-right: $xs-size;
+}
+
+.inputButton {
+    padding: $xs-size;
+}
