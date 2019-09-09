@@ -45637,7 +45637,7 @@ var Header = function Header() {
     className: "header-title"
   }, "Weekly Project: WeatherApp"), _react.default.createElement("p", {
     className: "header-desc"
-  }, "This is project is built with ReactJS, styled by ReactStrap and linked up OpenWeather Api."));
+  }, "This is project is built with ReactJS, styled by ReactStrap and using OpenWeather Api for its data."));
 };
 
 var _default = Header;
@@ -45656,27 +45656,88 @@ var _reactstrap = require("reactstrap");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var InputForm = function InputForm() {
-  return _react.default.createElement("div", {
-    className: "inputContainer"
-  }, _react.default.createElement(_reactstrap.Form, {
-    className: "inputForm",
-    inline: true
-  }, _react.default.createElement(_reactstrap.FormGroup, {
-    className: "inputGroup"
-  }, _react.default.createElement(_reactstrap.Label, {
-    for: "exampleCity",
-    className: "inputLabel"
-  }, "CITY"), _react.default.createElement(_reactstrap.Input, {
-    type: "text",
-    name: "city",
-    id: "exampleCity",
-    placeholder: "Examle Burnaby",
-    className: "inputBox"
-  }), _react.default.createElement(_reactstrap.Button, {
-    className: "inputButton"
-  }, "Submit"))));
-};
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var InputForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(InputForm, _React$Component);
+
+  function InputForm(props) {
+    var _this;
+
+    _classCallCheck(this, InputForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(InputForm).call(this, props));
+    _this.state = {
+      value: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(InputForm, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState({
+        value: event.target.value
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      alert('A name was submitted: ' + this.state.value);
+      event.preventDefault();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        className: "inputContainer"
+      }, _react.default.createElement(_reactstrap.Form, {
+        className: "inputForm",
+        inline: true,
+        onSubmit: this.handleSubmit
+      }, _react.default.createElement(_reactstrap.FormGroup, {
+        className: "inputGroup"
+      }, _react.default.createElement(_reactstrap.Label, {
+        for: "exampleCity",
+        className: "inputLabel"
+      }, "CITY"), _react.default.createElement(_reactstrap.Input, {
+        type: "text",
+        name: "city",
+        id: "exampleCity",
+        placeholder: "Example: Burnaby",
+        className: "inputBox",
+        value: this.state.value,
+        onChange: this.handleChange
+      }), _react.default.createElement(_reactstrap.Button, {
+        type: "submit",
+        value: "Submit",
+        className: "inputButton"
+      }, "Submit"))));
+    }
+  }]);
+
+  return InputForm;
+}(_react.default.Component);
 
 var _default = InputForm;
 exports.default = _default;
