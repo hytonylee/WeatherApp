@@ -1,0 +1,15 @@
+.weatherContainer {
+    background-color: #D3D3D3;
+    margin: 10vh;
+    padding: 10vh;
+    display: flex;
+    flex-wrap: center;
+}
+
+.weahterCard {
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid white;
+    max-width: 100px;
+
+}
