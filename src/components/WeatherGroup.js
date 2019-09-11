@@ -2,13 +2,14 @@ import React from 'react';
 import WeatherSingle from './WeatherSingle';
 import { weathers } from '../data/weatherData';
 
-const WeatherGroup = () => {
+const WeatherGroup = (props) => {
     const WeatherGroup = weathers.map(weather => (
-        <WeatherSingle day={weather.day} weather={weather.weather} temperature={weather.temperature} />
+        <WeatherSingle key={weather.id} day={weather.day} weather={weather.weather} temperature={weather.temperature} />
     ))
 
     return (
         <div className='weatherContainer'>
+            <h2>{props.city}</h2>
             {WeatherGroup}
         </div>
     )

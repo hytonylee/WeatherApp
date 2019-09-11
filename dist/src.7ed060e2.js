@@ -45652,38 +45652,38 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactstrap = require("reactstrap");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var InputForm = function InputForm(props) {
+var InputForm = function InputForm(_ref) {
+  var onSubmit = _ref.onSubmit,
+      onChange = _ref.onChange;
   return _react.default.createElement("div", {
     className: "inputContainer"
-  }, _react.default.createElement(_reactstrap.Form, {
+  }, _react.default.createElement("form", {
     className: "inputForm",
-    inline: true,
-    onSubmit: props.loadWeather
-  }, _react.default.createElement(_reactstrap.FormGroup, {
-    className: "inputGroup"
-  }, _react.default.createElement(_reactstrap.Label, {
-    for: "exampleCity",
+    onSubmit: onSubmit
+  }, _react.default.createElement("label", {
     className: "inputLabel"
-  }, "CITY"), _react.default.createElement(_reactstrap.Input, {
+  }, "City"), _react.default.createElement("input", {
+    className: "inputBox",
     type: "text",
     name: "city",
-    id: "exampleCity",
-    placeholder: "Example: Burnaby",
+    onChange: onChange
+  }), _react.default.createElement("label", {
+    className: "inputLabel"
+  }, "Country"), _react.default.createElement("input", {
     className: "inputBox",
-    value: props.value
-  }), _react.default.createElement(_reactstrap.Button, {
-    type: "submit",
+    type: "text",
+    name: "country",
+    onChange: onChange
+  }), _react.default.createElement("button", {
     className: "inputButton"
-  }, "Get Weather Info"))));
+  }, "Submit")));
 };
 
 var _default = InputForm;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","reactstrap":"../node_modules/reactstrap/es/index.js"}],"../src/components/WeatherSingle.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../src/components/WeatherSingle.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45699,7 +45699,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WeatherSingle = function WeatherSingle(props) {
   return _react.default.createElement("div", null, _react.default.createElement(_reactstrap.Card, {
-    className: "weahterCard"
+    className: "weahterCard",
+    key: props.id
   }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, props.day), _react.default.createElement(_reactstrap.CardSubtitle, null, props.weather), _react.default.createElement(_reactstrap.CardText, null, props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
 };
 
@@ -45713,30 +45714,44 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.weathers = void 0;
 var weathers = [{
+  id: '1',
+  city: '',
   day: 'Monday',
   weather: 'Sunny',
   temperature: 20
 }, {
+  id: '2',
+  city: '',
   day: 'Tuesday',
   weather: 'Cloudy',
   temperature: 10
 }, {
+  id: '3',
+  city: '',
   day: 'Wednesday',
   weather: 'Rain',
   temperature: 13
 }, {
+  id: '4',
+  city: '',
   day: 'Thursday',
   weather: 'Snow',
   temperature: -13
 }, {
+  id: '5',
+  city: '',
   day: 'Friday',
   weather: 'Snow Rain',
-  temperature: 3
+  temperature: '3'
 }, {
+  id: '6',
+  city: '',
   day: 'Saturday',
   weather: 'Blizzard',
   temperature: -20
 }, {
+  id: '7',
+  city: '',
   day: 'Sunday',
   weather: 'Windy',
   temperature: 22
@@ -45758,9 +45773,10 @@ var _weatherData = require("../data/weatherData");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var WeatherGroup = function WeatherGroup() {
+var WeatherGroup = function WeatherGroup(props) {
   var WeatherGroup = _weatherData.weathers.map(function (weather) {
     return _react.default.createElement(_WeatherSingle.default, {
+      key: weather.id,
       day: weather.day,
       weather: weather.weather,
       temperature: weather.temperature
@@ -45769,7 +45785,7 @@ var WeatherGroup = function WeatherGroup() {
 
   return _react.default.createElement("div", {
     className: "weatherContainer"
-  }, WeatherGroup);
+  }, _react.default.createElement("h2", null, props.city), WeatherGroup);
 };
 
 var _default = WeatherGroup;
@@ -45793,6 +45809,8 @@ var _WeatherGroup = _interopRequireDefault(require("./components/WeatherGroup"))
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -45823,23 +45841,33 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
       city: '',
+      coutnry: '',
       weather: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
+      alert("You are submitting " + this.state.city + ', ' + this.state.country);
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var name = event.target.name;
+      var value = event.target.value;
+      this.setState(_defineProperty({}, name, value));
     }
   }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement(_Header.default, null), _react.default.createElement(_InputForm.default, {
-        onSubmit: this.handleSubmit
+        onSubmit: this.handleSubmit,
+        onChange: this.handleChange
       }), _react.default.createElement(_WeatherGroup.default, null));
     }
   }]);
@@ -45889,7 +45917,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49159" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49489" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

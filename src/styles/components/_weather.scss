@@ -4,12 +4,13 @@
     padding: 10vh;
     display: flex;
     flex-wrap: center;
+    justify-content: space-between;
 }
 
 .weahterCard {
     background-color: white;
     border-radius: 3px;
     border: 1px solid white;
-    max-width: 100px;
-
+    min-width: 30fr;
+    padding: 5vh;
 }

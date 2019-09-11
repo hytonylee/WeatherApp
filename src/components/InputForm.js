@@ -1,31 +1,15 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-
-const InputForm = (props) => {
+const InputForm = ({ onSubmit, onChange }) => {
     return (
         <div className="inputContainer">
-            <Form className="inputForm" inline onSubmit={props.loadWeather}>
-                <FormGroup className="inputGroup">
-                    <Label
-                        for="exampleCity"
-                        className="inputLabel"
-                    >CITY</Label>
-                    <Input
-                        type="text"
-                        name="city"
-                        id="exampleCity"
-                        placeholder="Example: Burnaby"
-                        className="inputBox"
-                        value={props.value}
-                    />
-                    <Button
-                        type="submit"
-                        className="inputButton"
-                    >Get Weather Info
-                    </Button>
-                </FormGroup>
-            </Form>
+            <form className='inputForm' onSubmit={onSubmit}>
+                <label className='inputLabel'>City</label>
+                <input className='inputBox' type='text' name='city' onChange={onChange} />
+                <label className='inputLabel'>Country</label>
+                <input className='inputBox' type='text' name='country' onChange={onChange} />
+                <button className='inputButton' >Submit</button>
+            </form>
 
         </div>
     )
