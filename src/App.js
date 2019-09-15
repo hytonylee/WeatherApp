@@ -9,7 +9,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            weather: [],
+            weathers: [],
             isLoading: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,13 +20,14 @@ class App extends React.Component {
         event.preventDefault();
         let city = this.state.city;
         let country = this.state.country;
-        Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${process.env.SECRET_KEY}`)
+
+        Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&cnt=10&APPID=${process.env.SECRET_KEY}`)
             .then((response) => {
-                console.log(response.data.list);
-                // console.log(response.status);
-                // console.log(response.statusText);
-                // console.log(response.headers);
-                // console.log(response.config);
+                let weatherData = response.data.list;
+                weatherData.map(weatherInfo => {
+                    console.log(weatherInfo)
+                })
+                // console.log(new Date(weatherData.list[0].dt * 1000).toISOString())
             });
     }
 

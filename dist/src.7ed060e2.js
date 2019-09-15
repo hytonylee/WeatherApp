@@ -48029,7 +48029,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      weather: [],
+      weathers: [],
       isLoading: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -48044,11 +48044,11 @@ function (_React$Component) {
       var city = this.state.city;
       var country = this.state.country;
 
-      _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
-        console.log(response.data.list); // console.log(response.status);
-        // console.log(response.statusText);
-        // console.log(response.headers);
-        // console.log(response.config);
+      _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&units=metric&cnt=10&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
+        var weatherData = response.data.list;
+        weatherData.map(function (weatherInfo) {
+          console.log(weatherInfo);
+        }); // console.log(new Date(weatherData.list[0].dt * 1000).toISOString())
       });
     }
   }, {
@@ -48113,7 +48113,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49808" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56303" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
