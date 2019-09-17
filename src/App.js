@@ -21,16 +21,29 @@ class App extends React.Component {
         let city = this.state.city;
         let country = this.state.country;
 
+        this.setState({
+            isLoading: true
+        })
+
         Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&cnt=10&APPID=${process.env.SECRET_KEY}`)
             .then((response) => {
                 let weatherData = response.data.list;
-                weatherData.map(weatherInfo => {
-                    console.log(weatherInfo)
+                weatherData.map(weather => {
+                    let newWeathers = [];
+                    let newWeather;
+                    newWeather = {
+                        date: weather.dt,
+                        temp: weather.main.temp,
+                        weather: weather.weather[0].main
+                    }
+                    newWeathers.push(newWeather);
+                    this.setState({
+                        weathers: [...this.state.weathers, newWeathers]
+                    })
+                    // debugger
                 })
-                // console.log(new Date(weatherData.list[0].dt * 1000).toISOString())
             });
     }
-
 
     handleChange(event) {
         let name = event.target.name;
@@ -47,10 +60,12 @@ class App extends React.Component {
                 <Header />
                 <InputForm
                     onSubmit={this.handleSubmit} onChange={this.handleChange} />
-                <WeatherGroup />
+                <WeatherGroup city={this.state.city} weathers={this.state.weathers} isLoad={this.state.isLoading} />
             </div>
         )
     }
 }
 
 export default App;
+
+// new Date((weatherInfo.dt * 1000).toISOString()).slice(0, 10)

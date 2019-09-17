@@ -8,7 +8,6 @@ const WeatherSingle = (props) => {
     return (
         <div>
             <Card className='weahterCard' key={props.id}>
-                {/* <CardImg top width="100%" src="/assets/318x180.svg" alt="Card image cap" /> */}
                 <CardBody>
                     <CardTitle>{props.day}</CardTitle>
                     <CardSubtitle>{props.weather}</CardSubtitle>
