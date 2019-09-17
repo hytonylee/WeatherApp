@@ -45733,92 +45733,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WeatherSingle = function WeatherSingle(props) {
   return _react.default.createElement("div", null, _react.default.createElement(_reactstrap.Card, {
-    className: "weahterCard",
-    key: props.id
-  }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, props.day), _react.default.createElement(_reactstrap.CardSubtitle, null, props.weather), _react.default.createElement(_reactstrap.CardText, null, props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
+    className: "weahterCard"
+  }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, "Hello"), _react.default.createElement(_reactstrap.CardSubtitle, null, props.weather), _react.default.createElement(_reactstrap.CardSubtitle, null, new Date(props.date * 1000).toISOString().slice(0, 10)), _react.default.createElement(_reactstrap.CardText, null, props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
 };
 
 var _default = WeatherSingle;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","reactstrap":"../node_modules/reactstrap/es/index.js"}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var ErrorBoundary =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ErrorBoundary, _React$Component);
-
-  function ErrorBoundary(props) {
-    var _this;
-
-    _classCallCheck(this, ErrorBoundary);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ErrorBoundary).call(this, props));
-    _this.state = {
-      hasError: false
-    };
-    return _this;
-  }
-
-  _createClass(ErrorBoundary, [{
-    key: "componentDidCatch",
-    value: function componentDidCatch(error, errorInfo) {
-      // You can also log the error to an error reporting service
-      logErrorToMyService(error, errorInfo);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (this.state.hasError) {
-        // You can render any custom fallback UI
-        return _react.default.createElement("h1", null, "Something went wrong.");
-      }
-
-      return this.props.children;
-    }
-  }], [{
-    key: "getDerivedStateFromError",
-    value: function getDerivedStateFromError(error) {
-      // Update state so the next render will show the fallback UI.
-      return {
-        hasError: true
-      };
-    }
-  }]);
-
-  return ErrorBoundary;
-}(_react.default.Component);
-
-var _default = ErrorBoundary;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../src/data/weatherData.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","reactstrap":"../node_modules/reactstrap/es/index.js"}],"../src/data/weatherData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45881,32 +45802,27 @@ var _react = _interopRequireDefault(require("react"));
 
 var _WeatherSingle = _interopRequireDefault(require("./WeatherSingle"));
 
-var _ErrorBoundary = _interopRequireDefault(require("./ErrorBoundary"));
-
 var _weatherData = require("../data/weatherData");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WeatherGroup = function WeatherGroup(props) {
-  // const WeatherGroup = weathers.map(weather => (
-  //     <WeatherSingle key={weather.id} day={weather.day} weather={weather.weather} temperature={weather.temperature} />
-  // ))
   var WeatherGroup = props.weathers.map(function (weather) {
     return _react.default.createElement(_WeatherSingle.default, {
-      key: weather.date,
-      date: weather.date,
-      weather: weather.weather,
-      temperature: weather.temp
+      key: JSON.stringify(weather.date),
+      date: JSON.stringify(weather.date),
+      weather: JSON.stringify(weather.weather),
+      temperature: JSON.stringify(weather.temp)
     });
   });
-  return _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement("div", {
+  return _react.default.createElement("div", {
     className: "weatherContainer"
-  }, _react.default.createElement("h2", null, props.city), WeatherGroup));
+  }, _react.default.createElement("h2", null, props.city), WeatherGroup);
 };
 
 var _default = WeatherGroup;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./WeatherSingle":"../src/components/WeatherSingle.js","./ErrorBoundary":"../src/components/ErrorBoundary.js","../data/weatherData":"../src/data/weatherData.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./WeatherSingle":"../src/components/WeatherSingle.js","../data/weatherData":"../src/data/weatherData.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -47619,7 +47535,85 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ErrorBoundary =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ErrorBoundary, _React$Component);
+
+  function ErrorBoundary(props) {
+    var _this;
+
+    _classCallCheck(this, ErrorBoundary);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ErrorBoundary).call(this, props));
+    _this.state = {
+      hasError: false
+    };
+    return _this;
+  }
+
+  _createClass(ErrorBoundary, [{
+    key: "componentDidCatch",
+    value: function componentDidCatch(error, errorInfo) {
+      // You can also log the error to an error reporting service
+      logErrorToMyService(error, errorInfo);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return _react.default.createElement("h1", null, "Something went wrong.");
+      }
+
+      return this.props.children;
+    }
+  }], [{
+    key: "getDerivedStateFromError",
+    value: function getDerivedStateFromError(error) {
+      // Update state so the next render will show the fallback UI.
+      return {
+        hasError: true
+      };
+    }
+  }]);
+
+  return ErrorBoundary;
+}(_react.default.Component);
+
+var _default = ErrorBoundary;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
 
 },{}],"../node_modules/path-browserify/index.js":[function(require,module,exports) {
 var process = require("process");
@@ -48075,6 +48069,8 @@ var _WeatherGroup = _interopRequireDefault(require("./components/WeatherGroup"))
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _ErrorBoundary = _interopRequireDefault(require("./components/ErrorBoundary"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -48139,22 +48135,16 @@ function (_React$Component) {
         isLoading: true
       });
 
-      _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&units=metric&cnt=10&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
+      _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&units=metric&cnt=40&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
         var weatherData = response.data.list;
         weatherData.map(function (weather) {
-          var newWeathers = [];
-          var newWeather;
-          newWeather = {
-            date: weather.dt,
-            temp: weather.main.temp,
-            weather: weather.weather[0].main
-          };
-          newWeathers.push(newWeather);
-
           _this2.setState({
-            weathers: [].concat(_toConsumableArray(_this2.state.weathers), [newWeathers])
-          }); // debugger
-
+            weathers: [].concat(_toConsumableArray(_this2.state.weathers), [{
+              date: weather.dt,
+              temp: weather.main.temp,
+              weather: weather.weather[0].main
+            }])
+          });
         });
       });
     }
@@ -48168,7 +48158,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement(_Header.default, null), _react.default.createElement(_InputForm.default, {
+      return _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement(_Header.default, null), _react.default.createElement(_InputForm.default, {
         onSubmit: this.handleSubmit,
         onChange: this.handleChange
       }), _react.default.createElement(_WeatherGroup.default, {
@@ -48182,10 +48172,9 @@ function (_React$Component) {
   return App;
 }(_react.default.Component);
 
-var _default = App; // new Date((weatherInfo.dt * 1000).toISOString()).slice(0, 10)
-
+var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./components/Header":"../src/components/Header.js","./components/InputForm":"../src/components/InputForm.js","./components/WeatherGroup":"../src/components/WeatherGroup.js","axios":"../node_modules/axios/index.js","dotenv":"../node_modules/dotenv/lib/main.js"}],"../src/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/Header":"../src/components/Header.js","./components/InputForm":"../src/components/InputForm.js","./components/WeatherGroup":"../src/components/WeatherGroup.js","axios":"../node_modules/axios/index.js","./components/ErrorBoundary":"../src/components/ErrorBoundary.js","dotenv":"../node_modules/dotenv/lib/main.js"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

@@ -7,10 +7,11 @@ import {
 const WeatherSingle = (props) => {
     return (
         <div>
-            <Card className='weahterCard' key={props.id}>
+            <Card className='weahterCard'>
                 <CardBody>
-                    <CardTitle>{props.day}</CardTitle>
+                    <CardTitle>Hello</CardTitle>
                     <CardSubtitle>{props.weather}</CardSubtitle>
+                    <CardSubtitle>{new Date(props.date * 1000).toISOString().slice(0, 10)}</CardSubtitle>
                     <CardText>{props.temperature}</CardText>
                     <Button>More Detail</Button>
                 </CardBody>
@@ -20,3 +21,4 @@ const WeatherSingle = (props) => {
 }
 
 export default WeatherSingle;
+
