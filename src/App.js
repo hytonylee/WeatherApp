@@ -23,7 +23,8 @@ class App extends React.Component {
         let country = this.state.country;
 
         this.setState({
-            isLoading: true
+            isLoading: true,
+            weathers: []
         })
 
         Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&cnt=40&APPID=${process.env.SECRET_KEY}`)

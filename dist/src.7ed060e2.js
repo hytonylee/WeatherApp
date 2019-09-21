@@ -45807,7 +45807,11 @@ var _weatherData = require("../data/weatherData");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WeatherGroup = function WeatherGroup(props) {
-  var WeatherGroup = props.weathers.map(function (weather) {
+  var weatherFiveDays = [];
+
+  for (var i = 0; i < props.weathers.length; i + 5) {}
+
+  var weatherGroup = props.weathers.map(function (weather) {
     return _react.default.createElement(_WeatherSingle.default, {
       key: JSON.stringify(weather.date),
       date: JSON.stringify(weather.date),
@@ -45817,7 +45821,7 @@ var WeatherGroup = function WeatherGroup(props) {
   });
   return _react.default.createElement("div", {
     className: "weatherContainer"
-  }, _react.default.createElement("h2", null, props.city), WeatherGroup);
+  }, _react.default.createElement("h2", null, props.city), weatherGroup);
 };
 
 var _default = WeatherGroup;
@@ -48132,7 +48136,8 @@ function (_React$Component) {
       var city = this.state.city;
       var country = this.state.country;
       this.setState({
-        isLoading: true
+        isLoading: true,
+        weathers: []
       });
 
       _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&units=metric&cnt=40&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
