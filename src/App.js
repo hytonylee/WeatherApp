@@ -7,6 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 require('dotenv').config()
 
 class App extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -30,15 +31,19 @@ class App extends React.Component {
         Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&cnt=40&APPID=${process.env.SECRET_KEY}`)
             .then((response) => {
                 let weatherData = response.data.list;
+                console.log(weatherData)
                 weatherData.map(weather => {
                     this.setState({
                         weathers: [...this.state.weathers, {
                             date: weather.dt,
+
                             temp: weather.main.temp,
                             weather: weather.weather[0].main
                         }]
                     })
                 })
+
+
             });
     }
 
@@ -55,6 +60,7 @@ class App extends React.Component {
         return (
             <ErrorBoundary>
                 <Header />
+                <i class="wi wi-night-sleet"></i>``
                 <InputForm
                     onSubmit={this.handleSubmit} onChange={this.handleChange} />
                 <WeatherGroup city={this.state.city} weathers={this.state.weathers} isLoad={this.state.isLoading} />

@@ -3,7 +3,7 @@
     margin: 10vh;
     padding: 10vh;
     display: flex;
-    flex-wrap: center;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -12,5 +12,6 @@
     border-radius: 3px;
     border: 1px solid white;
     min-width: 30fr;
-    padding: 5vh;
+    margin-top: 1vh;
+    padding: 1vw;
 }

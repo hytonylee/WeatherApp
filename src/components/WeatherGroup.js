@@ -4,11 +4,17 @@ import { weathers } from '../data/weatherData';
 
 const WeatherGroup = (props) => {
 
-    let weatherFiveDays = []
+    let weatherData = props.weathers;
+    let oneDay = {};
+    let fiveDays = [];
 
-    for (let i = 0; i < props.weathers.length; i + 5) {
+    const setFiveDays = (data) => {
+        for (let i = 0; i <= data.length; i++) {
 
+        }
     }
+
+
 
     const weatherGroup = props.weathers.map(weather => (
         <WeatherSingle
@@ -23,6 +29,7 @@ const WeatherGroup = (props) => {
         <div className='weatherContainer'>
             <h2>{props.city}</h2>
             {weatherGroup}
+
         </div>
     )
 }

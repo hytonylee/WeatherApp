@@ -45734,7 +45734,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var WeatherSingle = function WeatherSingle(props) {
   return _react.default.createElement("div", null, _react.default.createElement(_reactstrap.Card, {
     className: "weahterCard"
-  }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, "Hello"), _react.default.createElement(_reactstrap.CardSubtitle, null, props.weather), _react.default.createElement(_reactstrap.CardSubtitle, null, new Date(props.date * 1000).toISOString().slice(0, 10)), _react.default.createElement(_reactstrap.CardText, null, props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
+  }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, props.weather), _react.default.createElement(_reactstrap.CardSubtitle, null, "Date: ", new Date(props.date * 1000).toISOString().slice(0, 10)), _react.default.createElement(_reactstrap.CardSubtitle, null, "Time: ", new Date(props.date * 1000).toISOString().slice(11, 16)), _react.default.createElement(_reactstrap.CardText, null, "Temperature: ", props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
 };
 
 var _default = WeatherSingle;
@@ -45807,9 +45807,13 @@ var _weatherData = require("../data/weatherData");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WeatherGroup = function WeatherGroup(props) {
-  var weatherFiveDays = [];
+  var weatherData = props.weathers;
+  var oneDay = {};
+  var fiveDays = [];
 
-  for (var i = 0; i < props.weathers.length; i + 5) {}
+  var setFiveDays = function setFiveDays(data) {
+    for (var i = 0; i <= data.length; i++) {}
+  };
 
   var weatherGroup = props.weathers.map(function (weather) {
     return _react.default.createElement(_WeatherSingle.default, {
@@ -48142,6 +48146,7 @@ function (_React$Component) {
 
       _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&units=metric&cnt=40&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
         var weatherData = response.data.list;
+        console.log(weatherData);
         weatherData.map(function (weather) {
           _this2.setState({
             weathers: [].concat(_toConsumableArray(_this2.state.weathers), [{
@@ -48163,7 +48168,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement(_Header.default, null), _react.default.createElement(_InputForm.default, {
+      return _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement(_Header.default, null), _react.default.createElement("i", {
+        class: "wi wi-night-sleet"
+      }), "``", _react.default.createElement(_InputForm.default, {
         onSubmit: this.handleSubmit,
         onChange: this.handleChange
       }), _react.default.createElement(_WeatherGroup.default, {
@@ -48219,7 +48226,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56303" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50506" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
