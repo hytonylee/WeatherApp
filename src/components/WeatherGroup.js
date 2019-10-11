@@ -18,8 +18,9 @@ const WeatherGroup = (props) => {
 
     const weatherGroup = props.weathers.map(weather => (
         <WeatherSingle
-            key={JSON.stringify(weather.date)}
+            key={JSON.stringify(weather.key)}
             date={JSON.stringify(weather.date)}
+            time={JSON.stringify(weather.time)}
             weather={JSON.stringify(weather.weather)}
             temperature={JSON.stringify(weather.temp)}
         />

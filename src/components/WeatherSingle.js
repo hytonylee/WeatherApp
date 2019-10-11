@@ -10,8 +10,8 @@ const WeatherSingle = (props) => {
             <Card className='weahterCard'>
                 <CardBody>
                     <CardTitle>{props.weather}</CardTitle>
-                    <CardSubtitle>Date: {new Date(props.date * 1000).toISOString().slice(0, 10)}</CardSubtitle>
-                    <CardSubtitle>Time: {new Date(props.date * 1000).toISOString().slice(11, 16)}</CardSubtitle>
+                    <CardSubtitle>Date: {props.date}</CardSubtitle>
+                    <CardSubtitle>Time: {props.time}</CardSubtitle>
                     <CardText>Temperature: {props.temperature}</CardText>
                     <Button>More Detail</Button>
                 </CardBody>

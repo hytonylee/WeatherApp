@@ -45734,7 +45734,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var WeatherSingle = function WeatherSingle(props) {
   return _react.default.createElement("div", null, _react.default.createElement(_reactstrap.Card, {
     className: "weahterCard"
-  }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, props.weather), _react.default.createElement(_reactstrap.CardSubtitle, null, "Date: ", new Date(props.date * 1000).toISOString().slice(0, 10)), _react.default.createElement(_reactstrap.CardSubtitle, null, "Time: ", new Date(props.date * 1000).toISOString().slice(11, 16)), _react.default.createElement(_reactstrap.CardText, null, "Temperature: ", props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
+  }, _react.default.createElement(_reactstrap.CardBody, null, _react.default.createElement(_reactstrap.CardTitle, null, props.weather), _react.default.createElement(_reactstrap.CardSubtitle, null, "Date: ", props.date), _react.default.createElement(_reactstrap.CardSubtitle, null, "Time: ", props.time), _react.default.createElement(_reactstrap.CardText, null, "Temperature: ", props.temperature), _react.default.createElement(_reactstrap.Button, null, "More Detail"))));
 };
 
 var _default = WeatherSingle;
@@ -45817,8 +45817,9 @@ var WeatherGroup = function WeatherGroup(props) {
 
   var weatherGroup = props.weathers.map(function (weather) {
     return _react.default.createElement(_WeatherSingle.default, {
-      key: JSON.stringify(weather.date),
+      key: JSON.stringify(weather.key),
       date: JSON.stringify(weather.date),
+      time: JSON.stringify(weather.time),
       weather: JSON.stringify(weather.weather),
       temperature: JSON.stringify(weather.temp)
     });
@@ -48124,6 +48125,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
       weathers: [],
+      fiveDays: [],
       isLoading: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -48139,22 +48141,36 @@ function (_React$Component) {
       event.preventDefault();
       var city = this.state.city;
       var country = this.state.country;
-      this.setState({
-        isLoading: true,
-        weathers: []
-      });
 
       _axios.default.get("https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, ",").concat(country, "&units=metric&cnt=40&APPID=").concat("a52d0f29f9d6707d598fbab920163475")).then(function (response) {
         var weatherData = response.data.list;
-        console.log(weatherData);
         weatherData.map(function (weather) {
           _this2.setState({
+            isLoading: true,
             weathers: [].concat(_toConsumableArray(_this2.state.weathers), [{
-              date: weather.dt,
+              key: weather.dt,
+              date: new Date(weather.dt * 1000).toISOString().slice(0, 10),
+              time: new Date(weather.dt * 1000).toISOString().slice(11, 16),
               temp: weather.main.temp,
               weather: weather.weather[0].main
             }])
           });
+        });
+
+        var groupBy = function groupBy(arr, property) {
+          return arr.reduce(function (weather, x) {
+            if (!weather[x[property]]) {
+              weather[x[property]] = [];
+            }
+
+            ;
+            weather[x[property]].push(x);
+            return weather;
+          });
+        };
+
+        _this2.setState({
+          fiveDays: groupBy(_this2.state.weathers, 'date')
         });
       });
     }
@@ -48226,7 +48242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50506" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58147" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

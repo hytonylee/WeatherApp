@@ -12,6 +12,7 @@ class App extends React.Component {
         super(props)
         this.state = {
             weathers: [],
+            fiveDays: [],
             isLoading: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,27 +24,35 @@ class App extends React.Component {
         let city = this.state.city;
         let country = this.state.country;
 
-        this.setState({
-            isLoading: true,
-            weathers: []
-        })
-
         Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=metric&cnt=40&APPID=${process.env.SECRET_KEY}`)
             .then((response) => {
                 let weatherData = response.data.list;
-                console.log(weatherData)
                 weatherData.map(weather => {
                     this.setState({
+                        isLoading: true,
                         weathers: [...this.state.weathers, {
-                            date: weather.dt,
-
+                            key: weather.dt,
+                            date: new Date(weather.dt * 1000).toISOString().slice(0, 10),
+                            time: new Date(weather.dt * 1000).toISOString().slice(11, 16),
                             temp: weather.main.temp,
                             weather: weather.weather[0].main
-                        }]
+                        }],
                     })
                 })
 
+                const groupBy = (arr, property) => {
+                    return arr.reduce((weather, x) => {
+                        if (!weather[x[property]]) {
+                            weather[x[property]] = [];
+                        };
+                        weather[x[property]].push(x);
+                        return weather;
+                    })
+                }
 
+                this.setState({
+                    fiveDays: groupBy(this.state.weathers, 'date')
+                })
             });
     }
 
